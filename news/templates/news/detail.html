@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ news.title }}</title>
+</head>
+<body>
+<h1>{{ news.title }}</h1>
+<p>{{ news.text }}</p>
+<h2>{{ news.question_title }}</h2>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'news:vote' news.id %}" method="post">
+{% csrf_token %}
+{% for choice in news.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.text }}</label><br />
+{% endfor %}
+<input type="submit" value="Голосовать" />
+</form>
+<p><a href="{% url 'index' %}">Вернуться на главную</a></p>
+</body>
+</html>

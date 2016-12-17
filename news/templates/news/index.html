@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'news/style.css' %}">
+</head>
+<body>
+<ul>
+{% for news in news_list %}
+    <li><a href="{% url 'news:detail' news.pk %}">{{ news.title }}</a></li>
+{% endfor %}
+</ul>
+</body>
+</html>
